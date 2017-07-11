@@ -1,0 +1,35 @@
+﻿ @section scripts
+       {
+    <script>
+        $(document).ready(function () {
+            $.ajax(
+                {
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    url: 'http://localhost:56351/api/Subcribers',
+                    success: function (data) {
+                        try {                          
+                            var html = '<table><thead><th>ID</th><th>Name</th><th>Email</th><th>BirthDate</th></thead><tbody>';
+                            $.each(data, function (key, val) {
+                                debugger;
+                                html += '<tr><td>' + val.Id + '</td><td>' + val.Name + '</td><td>' + val.Email + '</td><td>' + val.BirthDate + '</td></tr>';
+                            });
+                            html += '</tbody></table>';
+                            $('#myGrid').html(html);
+                        } catch (e) {
+                            console.log('Error while formatting the data : ' + e.message)
+                        }
+                    },
+                    error: function (xhrequest, error, thrownError) {
+                        console.log('Error while ajax call: ' + error)
+                    }
+
+                }
+                );
+        });
+    </script>
+
+}
+ <div id="myGrid"></div> 
+   
